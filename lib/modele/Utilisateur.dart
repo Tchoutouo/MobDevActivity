@@ -29,10 +29,10 @@ class Utilisateur {
 }
 
 class UtilisateurDatabase {
-
+  late Database _database;
   Future<void> initialisation() async {
     _database = await openDatabase(
-      join(await getDatabasesPath(), 'utilisateurs_database.db'),
+      join(await getDatabasesPath(), 'utilisateurs.db'),
       onCreate: (db, version) {
         return db.execute(
           '''
@@ -55,7 +55,7 @@ class UtilisateurDatabase {
     );
   }
 
-  Future<void> insertUtilisateur(Utilisateur utilisateur) async {
+  Future<void> insertUtilisateur_(Utilisateur utilisateur) async {
 
     await _database.rawInsert(
 
@@ -82,7 +82,7 @@ class UtilisateurDatabase {
 
   }
   
-  Future<void> updateUtilisateur(Utilisateur utilisateur) async {
+  Future<void> updateUtilisateur_(Utilisateur utilisateur) async {
 
     await _database.rawUpdate(
 
@@ -115,7 +115,7 @@ class UtilisateurDatabase {
 
   }
 
-  Future<void> deleteUtilisateur(int id) async {
+  Future<void> deleteUtilisateur_(int id) async {
 
     await await _database.rawDelete('DELETE FROM utilisateurs WHERE id = ?', [id]);
 
